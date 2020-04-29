@@ -13,8 +13,13 @@ let grade = [
     { index: 's', x: 13, y: 2, filhos: [] }
 ]
 
-// Para começar a busca chame esse metodo no console
-// Ex: BuscaHeuristica('a', 's')
+var button = document.getElementById("busca-heuristica");
+button.addEventListener("click",function(e){
+    let raiz = document.getElementById("raiz").value;
+    let destino = document.getElementById("destino").value;
+    BuscaHeuristica(raiz, destino);
+},false);
+
 function BuscaHeuristica(noRaiz, noMeta) {
     let fila = [];
     fila = DefinirTrajetoria(fila, [ObterNo(noRaiz)], 0); // 1. Forme uma fila apenas com a raiz
@@ -118,8 +123,14 @@ function ImprimirCaminhoFinal(fila, destino) {
                 trajetoria = t;
         });
     });
+    
+    let resultadoContainer = document.getElementById("resultado");
+    resultadoContainer.innerHTML = "";
 
     trajetoria.caminho.forEach(caminho => {
+        var span = document.createElement("SPAN");
+        span.innerHTML = `=> ${caminho.index} `;
+        resultadoContainer.appendChild(span);
         console.log(`=> ${caminho.index} `)
     });
 }
